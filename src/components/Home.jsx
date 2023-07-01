@@ -5,12 +5,15 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditModal from "./EditModal";
 import AddModal from "./AddModal";
+import { useFilter } from "../context/FilterContext";
 
 const Home = () => {
   const [recipeData, setRecipeData] = useState(recipes);
   const [showModal, setShowModal] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
   const [recpieFormData, setrecpieFormData] = useState({});
+  const { setRecipesFilter, recipesFilter } = useFilter();
+
   const deleteHandler = (id) => {
     const filteredData = recipeData?.filter((item) => item?.id !== id);
     setRecipeData(filteredData);
@@ -25,7 +28,17 @@ const Home = () => {
   };
   useEffect(() => {
     localStorage.setItem("data", recipeData);
+    // eslint-disable-next-line
   }, [recipeData]);
+  const SortedData = recipeData.filter(({ name, ingredients, cuisine }) => {
+    if (recipesFilter.radioFilter === "name") {
+      return name
+        .toLowerCase()
+        .includes(recipesFilter.searchFilter.toLowerCase());
+    } else {
+      return null;
+    }
+  });
 
   return (
     <div>
@@ -48,19 +61,56 @@ const Home = () => {
         />
       ) : null}
       <div className="nav-bar">
-        <input type="text" className="search-input" />
+        <input
+          type="text"
+          className="search-input"
+          onChange={(e) =>
+            setRecipesFilter({ type: "SET_SEARCH", payload: e.target.value })
+          }
+        />
         <h4>Filters:</h4>
         <div className="radio-group">
           <label>
-            <input type="radio" name="filter-radio" />
+            <input
+              type="radio"
+              name="filter-radio"
+              value="name"
+              defaultChecked={recipesFilter.radioFilter === "name"}
+              onChange={(e) =>
+                setRecipesFilter({
+                  type: "SET_RADIO",
+                  payload: e.target.value,
+                })
+              }
+            />
             Name
           </label>
           <label>
-            <input type="radio" name="filter-radio" />
+            <input
+              type="radio"
+              name="filter-radio"
+              value="ingredients"
+              onChange={(e) =>
+                setRecipesFilter({
+                  type: "SET_RADIO",
+                  payload: e.target.value,
+                })
+              }
+            />
             Ingredients
           </label>
           <label>
-            <input type="radio" name="filter-radio" />
+            <input
+              type="radio"
+              name="filter-radio"
+              value="cuisine"
+              onChange={(e) =>
+                setRecipesFilter({
+                  type: "SET_RADIO",
+                  payload: e.target.value,
+                })
+              }
+            />
             Cuisine
           </label>
         </div>
