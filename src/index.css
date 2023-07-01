@@ -1,13 +1,131 @@
+:root {
+  --white-color: #fff;
+  --primary-color: gray;
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  border: 1px solid gray;
+  padding: 1rem 2rem;
+}
+
+.nav-bar .search-input {
+  height: 1.5rem;
+  padding: 0.1rem;
+  width: 20rem;
+}
+
+.cards {
+  display: flex;
+  gap: 2rem;
+  margin: 1rem;
+  align-items: center;
+}
+.card {
+  border: 1px solid gray;
+  padding: 2rem;
+  position: relative;
+}
+
+.card img {
+  height: 200px;
+  width: 200px;
+}
+.edit-icon {
+  position: absolute;
+  right: 25px;
+  top: 3px;
+}
+.delete-icon {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+}
+
+.edit-icon,
+.delete-icon:hover {
+  cursor: pointer;
+}
+
+.recipe-card {
+  border: 1px solid gray;
+  display: flex;
+  padding: 1rem 2rem;
+}
+.details-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 6rem;
+}
+
+.address-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--white-color);
+  border-radius: 5px;
+  text-align: center;
+  padding: 1rem 0rem;
+  width: 20rem;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.address-profile-form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  flex-grow: 1;
+  margin: 0.5rem 1rem;
+}
+.address-profile-label {
+  display: flex;
+}
+.address-profile-form input {
+  width: 100%;
+  height: 1.9rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 3px;
+  padding-left: 10px;
+}
+.address-modal-btns {
+  display: flex;
+  justify-content: space-evenly;
+}
+.address-modal-btns .btn-cancel,
+.btn-save {
+  color: var(--primary-color);
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid var(--primary-color);
+  padding: 0.5rem;
+}
+.address-modal-btns .btn-cancel:hover,
+.btn-save:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+.profile-address-modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  inset: 0;
+  position: fixed;
 }
