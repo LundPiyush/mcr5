@@ -39,6 +39,7 @@ const Home = () => {
       return null;
     }
   });
+  console.log(SortedData);
 
   return (
     <div>
